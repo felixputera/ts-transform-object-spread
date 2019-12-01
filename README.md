@@ -31,7 +31,13 @@ const extendedAddress = {
 };
 ```
 
-Why? Because TypeScript knows shapes of `Object`s, and they _should_ be re-written where possible since `Object.assign` and spread operator are slower than explicit property assignment ([benchmark](https://jsperf.com/object-cloning-benchmark)).
+## Motivation
+
+The spread operation and `Object.assign` (which is emitted by TS when you're targetting `ES2015`) is way slower than explicit property assignment (benchmark [here](https://jsperf.com/object-cloning-benchmark)).
+
+If you're using latest Chrome (tested on Chrome 78), you should see that spread operation is more than **50x** faster than `Object.assign` (V8 article on that [here](https://v8.dev/blog/spread-elements)). Subsequently, explicit property assignments is more than **25x** faster than spread operation.
+
+What's important here is the awareness of the cost of runtime object property reflection. Even if you didn't end up using this transformer, at least please write explicit object property assignments on the hot paths on your code.
 
 ## Usage
 
@@ -55,4 +61,4 @@ Unfortunately, the TypeScript compiler (`tsc`) doesn't support custom transforme
 
 ## Bug or Incorrect transformation
 
-If you do discover any bug or incorrect transformation, please don't hesitate to open an issue / PR [here](https://github.com/felixputera/ts-transform-object-spread). 
+If you do discover any bug or incorrect transformation, please don't hesitate to open an issue / PR [here](https://github.com/felixputera/ts-transform-object-spread).
