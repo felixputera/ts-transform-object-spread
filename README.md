@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/ts-transform-object-spread.svg)](https://badge.fury.io/js/ts-transform-object-spread)
 [![ci status](https://github.com/felixputera/ts-transform-object-spread/workflows/Test/badge.svg)](https://github.com/felixputera/ts-transform-object-spread/actions?query=workflow%3ATest)
 
-TypeScript compile-time transform that compiles your object spread operation inside an object literal to explicit property assignment(s).
+TypeScript transform that compiles object spread operation inside object literals into explicit property assignment.
 
 For example
 

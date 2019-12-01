@@ -1,6 +1,6 @@
 {
   "name": "ts-transform-object-spread",
-  "description": "TypeScript compile-time transform that compiles your object spread operation inside an object literal to explicit property assignment(s)",
+  "description": "TypeScript transform that compiles object spread operation inside object literals into explicit property assignment",
   "license": "MIT",
   "author": "Felix Putera <felixputera@gmail.com>",
   "version": "0.1.0",
