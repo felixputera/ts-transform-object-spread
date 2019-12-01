@@ -39,6 +39,8 @@ If you're using latest Chrome (tested on Chrome 78), you should see that spread 
 
 What's important here is the awareness of the cost of runtime object property reflection. Even if you didn't end up using this transformer, at least please write explicit object property assignments on the hot paths on your code.
 
+This transformer was written so that we can enjoy best of both worlds, the conciseness of spread operation & the performane of explicit property assignment.
+
 ## Usage
 
 Unfortunately, the TypeScript compiler (`tsc`) doesn't support custom transformers as of now (https://github.com/Microsoft/TypeScript/issues/14419) and as such, additional third party tool(s) must be used to achieve this functionality.
@@ -58,6 +60,31 @@ Unfortunately, the TypeScript compiler (`tsc`) doesn't support custom transforme
   }
 }
 ```
+
+## Warning
+
+If you don't have complete typing for your object(s), then this transformer will give you a _wrong_ result.
+
+For example
+
+```typescript
+interface Shape {
+  a: string;
+  b: string;
+  // c: string // actually the input has this field, but we never write it
+}
+
+function clone(input: Shape): Shape {
+  return { ...input };
+}
+
+clone({ a: "a", b: "b", c: "c" }); // TS will throw an error here
+clone(JSON.parse('{"a":"a","b":"b","c":"c"}')); // TS compiles this
+```
+
+On the example given above, TS will throw an error on the `clone(...)` call because it knows the shape of the input and it mismatched with the function argument interface.
+
+However, on `clone(JSON.parse(...))` call, TS will compile it and this the behaviour of the transformed code (returns `{ a: "a", b: "b" }`) will be different than the untransformed one (returns `{ a: "a", b: "b", c: "c" }`).
 
 ## Bug or Incorrect transformation
 
