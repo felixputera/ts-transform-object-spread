@@ -11,6 +11,9 @@
   },
   "author": "Felix Putera <felixputera@gmail.com>",
   "license": "MIT",
+  "files": [
+    "dist/*"
+  ],
   "peerDependencies": {
     "typescript": "3.x"
   },
