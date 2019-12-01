@@ -1,19 +1,20 @@
 {
   "name": "ts-transform-object-spread",
-  "version": "0.1.0",
-  "description": "",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "jest",
-    "prettier": "prettier --write src/**/*.ts spec/transform.spec.ts jest.config.js **/tsconfig.json",
-    "build": "tsc",
-    "prepublishOnly": "npm run build"
-  },
-  "author": "Felix Putera <felixputera@gmail.com>",
+  "description": "TypeScript compile-time transform that compiles your object spread operation inside an object literal to explicit property assignment(s)",
   "license": "MIT",
+  "author": "Felix Putera <felixputera@gmail.com>",
+  "version": "0.1.0",
+  "main": "dist/index.js",
   "files": [
     "dist/*"
   ],
+  "scripts": {
+    "build": "tsc",
+    "precommit": "lint-staged",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "prettier": "prettier --write src/**/*.ts spec/transform.spec.ts jest.config.js **/tsconfig.json ; prettier-package-json --write package.json"
+  },
   "peerDependencies": {
     "typescript": "3.x"
   },
@@ -22,11 +23,36 @@
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.14",
     "glob": "^7.1.6",
+    "husky": "^3.1.0",
     "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
+    "prettier-package-json": "^2.1.0",
     "ts-jest": "^24.2.0",
     "ts-node": "^8.5.4",
     "ttypescript": "^1.5.8",
     "typescript": "^3.7.2"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "prettier --write",
+      "git add"
+    ],
+    "jest.config.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "spec/transform.spec.ts": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/tsconfig.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "package.json": [
+      "prettier-package-json --write",
+      "git add"
+    ]
   }
 }
