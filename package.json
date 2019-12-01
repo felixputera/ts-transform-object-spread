@@ -3,7 +3,7 @@
   "description": "TypeScript transform that compiles object spread operation inside object literals into explicit property assignment",
   "license": "MIT",
   "author": "Felix Putera <felixputera@gmail.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "files": [
     "dist/*"
