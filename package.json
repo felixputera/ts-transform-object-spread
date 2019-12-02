@@ -3,6 +3,8 @@
   "description": "TypeScript transform that compiles object spread operation inside object literals into explicit property assignment",
   "license": "MIT",
   "author": "Felix Putera <felixputera@gmail.com>",
+  "homepage": "https://github.com/felixputera/ts-transform-object-spread#readme",
+  "bugs": "https://github.com/felixputera/ts-transform-object-spread/issues",
   "version": "0.1.1",
   "main": "dist/index.js",
   "files": [
