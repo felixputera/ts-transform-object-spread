@@ -5,7 +5,7 @@
   "author": "Felix Putera <felixputera@gmail.com>",
   "homepage": "https://github.com/felixputera/ts-transform-object-spread#readme",
   "bugs": "https://github.com/felixputera/ts-transform-object-spread/issues",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "files": [
     "dist/*"
