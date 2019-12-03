@@ -2,17 +2,43 @@ import * as ts from "typescript";
 
 const fullyInitializedObjExprs = new Map<ts.Expression, boolean>();
 
-function propertyAssignmentFromSpreadProperty(
-  property: ts.Symbol,
-  sourceObjectName: string
-): ts.PropertyAssignment {
-  return ts.createPropertyAssignment(
-    property.name,
-    ts.createPropertyAccess(
-      ts.createIdentifier(sourceObjectName),
-      ts.createIdentifier(property.name)
-    )
-  );
+export default function transformer(
+  program: ts.Program
+): ts.TransformerFactory<ts.SourceFile> {
+  const checker = program.getTypeChecker();
+
+  return context => {
+    const visit: ts.Visitor = node => {
+      if (
+        ts.isSpreadAssignment(node) &&
+        ts.isObjectLiteralExpression(node.parent)
+      ) {
+        const type = checker.getTypeAtLocation(node.expression);
+        const properties = checker.getPropertiesOfType(type);
+
+        if (
+          isSeenObject(node.expression) ||
+          isFullyDefinedObject(type, properties)
+        ) {
+          objectFullyDefined(node.parent);
+
+          return properties.map(prop =>
+            propertyAssignmentFromSpreadProperty(
+              prop,
+              node.expression.getText()
+            )
+          );
+        }
+
+        objectNotFullyDefined(node.parent);
+
+        return node;
+      }
+      return ts.visitEachChild(node, child => visit(child), context);
+    };
+
+    return node => ts.visitNode(node, visit);
+  };
 }
 
 function isSeenObject(identifier: ts.Expression): boolean {
@@ -53,41 +79,15 @@ function isFullyDefinedObject(type: ts.Type, properties: ts.Symbol[]) {
   );
 }
 
-export default function transformer(
-  program: ts.Program
-): ts.TransformerFactory<ts.SourceFile> {
-  const checker = program.getTypeChecker();
-
-  return context => {
-    const visit: ts.Visitor = node => {
-      if (
-        ts.isSpreadAssignment(node) &&
-        ts.isObjectLiteralExpression(node.parent)
-      ) {
-        const type = checker.getTypeAtLocation(node.expression);
-        const properties = checker.getPropertiesOfType(type);
-
-        if (
-          isSeenObject(node.expression) ||
-          isFullyDefinedObject(type, properties)
-        ) {
-          objectFullyDefined(node.parent);
-
-          return properties.map(prop =>
-            propertyAssignmentFromSpreadProperty(
-              prop,
-              node.expression.getText()
-            )
-          );
-        }
-
-        objectNotFullyDefined(node.parent);
-
-        return node;
-      }
-      return ts.visitEachChild(node, child => visit(child), context);
-    };
-
-    return node => ts.visitNode(node, visit);
-  };
+function propertyAssignmentFromSpreadProperty(
+  property: ts.Symbol,
+  sourceObjectName: string
+): ts.PropertyAssignment {
+  return ts.createPropertyAssignment(
+    property.name,
+    ts.createPropertyAccess(
+      ts.createIdentifier(sourceObjectName),
+      ts.createIdentifier(property.name)
+    )
+  );
 }
