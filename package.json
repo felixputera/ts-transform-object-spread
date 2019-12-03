@@ -12,7 +12,6 @@
   ],
   "scripts": {
     "build": "tsc",
-    "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
     "test": "jest",
     "prettier": "prettier --write src/**/*.ts spec/transform.spec.ts jest.config.js **/tsconfig.json ; prettier-package-json --write package.json"
@@ -34,6 +33,11 @@
     "ts-node": "^8.5.4",
     "ttypescript": "^1.5.8",
     "typescript": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "src/**/*.ts": [
