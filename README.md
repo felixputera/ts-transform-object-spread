@@ -1,7 +1,7 @@
 # ts-transform-object-spread
 
 [![npm version](https://badge.fury.io/js/ts-transform-object-spread.svg)](https://badge.fury.io/js/ts-transform-object-spread)
-[![ci status](https://github.com/felixputera/ts-transform-object-spread/workflows/Test/badge.svg)](https://github.com/felixputera/ts-transform-object-spread/actions?query=workflow%3ATest)
+[![ci status](https://github.com/felixputera/ts-transform-object-spread/workflows/Test/badge.svg)](https://github.com/felixputera/ts-transform-object-spread/actions?query=workflow%3ATest) [![Greenkeeper badge](https://badges.greenkeeper.io/felixputera/ts-transform-object-spread.svg)](https://greenkeeper.io/)
 
 TypeScript transform that compiles object spread operation inside object literals into explicit property assignment.
 
