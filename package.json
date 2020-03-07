@@ -41,24 +41,19 @@
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "jest.config.js": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "spec/transform.spec.ts": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "**/tsconfig.json": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "package.json": [
-      "prettier-package-json --write",
-      "git add"
+      "prettier-package-json --write"
     ]
   }
 }
