@@ -26,7 +26,7 @@
     "glob": "^7.1.6",
     "husky": "^4.2.3",
     "jest": "^24.9.0",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "prettier-package-json": "^2.1.0",
     "ts-jest": "^25.2.1",
@@ -41,24 +41,19 @@
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "jest.config.js": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "spec/transform.spec.ts": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "**/tsconfig.json": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "package.json": [
-      "prettier-package-json --write",
-      "git add"
+      "prettier-package-json --write"
     ]
   }
 }
