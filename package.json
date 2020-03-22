@@ -27,7 +27,7 @@
     "husky": "^4.2.3",
     "jest": "^24.9.0",
     "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "prettier-package-json": "^2.1.0",
     "ts-jest": "^25.2.1",
     "ts-node": "^8.5.4",
